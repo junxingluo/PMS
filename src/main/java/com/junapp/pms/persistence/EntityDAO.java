@@ -1,12 +1,12 @@
 package com.junapp.pms.persistence;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import com.junapp.pms.entity.Department;
-import com.junapp.pms.entity.Employee;
+import com.junapp.pms.entity.User;
 import com.junapp.pms.entity.PersistentEntity;
 
 public class EntityDAO {
@@ -14,9 +14,9 @@ public class EntityDAO {
 	private EntityDAO() {}
 	public static final EntityDAO instance = new EntityDAO();
 	
-	public void save(List<PersistentEntity> entities) {
+	public <T extends PersistentEntity> void save(List<T> entities) {
         
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSession();
   
         session.beginTransaction();
  
@@ -25,13 +25,28 @@ public class EntityDAO {
 		}
       
         session.getTransaction().commit();
- 
-        Query q = session.createQuery("From Employee ");
-                 
-        List<Employee> resultList = q.list();
-        System.out.println("num of employess:" + resultList.size());
-        for (Employee next : resultList) {
-            System.out.println("next employee: " + next);
-        }
     }
+	
+	public <T extends PersistentEntity> void save(T... entites) {
+		List<T> list = new LinkedList<>();
+		for (T persistentEntity : entites) {
+			list.add(persistentEntity);
+		}
+		save(list);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<User> getAllUsers() {
+		Session session = HibernateUtil.getSession();
+		
+		session.beginTransaction();
+		
+        Query q = session.createQuery("From User ");
+                 
+        List<User> resultList = q.list();
+        
+        session.getTransaction().commit();
+        
+		return resultList;
+	}
 }

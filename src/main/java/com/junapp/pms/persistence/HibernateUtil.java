@@ -1,5 +1,7 @@
 package com.junapp.pms.persistence;
 
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
   
@@ -20,6 +22,17 @@ public class HibernateUtil {
   
     public static SessionFactory getSessionFactory() {
         return sessionFactory;
+    }
+    
+    /**
+     * @return current session or a new one, if none exists
+     */
+    public static Session getSession() {
+    	try {
+    		return HibernateUtil.getSessionFactory().getCurrentSession();
+    	} catch (HibernateException e) {
+    		return HibernateUtil.getSessionFactory().openSession();
+    	}
     }
   
     public static void shutdown() {

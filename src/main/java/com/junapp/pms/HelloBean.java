@@ -3,8 +3,13 @@ package com.junapp.pms;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.event.ActionListener;
+import javax.persistence.Entity;
+
+import com.junapp.pms.entity.User;
+import com.junapp.pms.persistence.EntityDAO;
 
 import java.io.Serializable;
+import java.util.List;
 
 @ManagedBean
 @SessionScoped
