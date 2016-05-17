@@ -30,4 +30,15 @@ public class HelloBean implements Serializable {
 	public ActionListener getAL() {
 		return null;
 	}
+	
+	public static void main(String[] args)
+	{
+//		User user = new User("Jun Jun Jun Jun 4", "abcdefg321");
+//		EntityDAO.instance.save(user);
+		
+		List<User> allUsers = EntityDAO.instance.getAllUsers();
+		for (User user2 : allUsers) {
+			System.err.println(user2.getName() + " " + user2.getPasswordHash());
+		}
+	}
 }
