@@ -35,6 +35,21 @@ public class EntityDAO {
 		save(list);
 	}
 	
+	public User getUserByName(String username)
+	{
+		Session session = HibernateUtil.getSession();
+		
+		session.beginTransaction();
+		
+        Query q = session.createQuery("From User where name = '"+username+"'");
+                 
+        User result = (User) q.uniqueResult();
+        
+        session.getTransaction().commit();
+		
+		return result;
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<User> getAllUsers() {
 		Session session = HibernateUtil.getSession();

@@ -7,6 +7,11 @@
 
 	<display-name>JavaServerFaces</display-name>
 
+	<listener>
+	    <listener-class>com.sun.faces.config.ConfigureListener</listener-class>
+	</listener>
+
+
 	<!-- Change to "Production" when you are ready to deploy -->
 	<context-param>
 		<param-name>javax.faces.PROJECT_STAGE</param-name>
@@ -15,7 +20,7 @@
 
 	<!-- Welcome page -->
 	<welcome-file-list>
-		<welcome-file>hello.xhtml</welcome-file>
+		<welcome-file>login.xhtml</welcome-file>
 	</welcome-file-list>
 
 	<!-- JSF mapping -->
@@ -28,7 +33,7 @@
 	<!-- Map these files with JSF -->
 	<servlet-mapping>
 		<servlet-name>Faces Servlet</servlet-name>
-		<url-pattern>/faces/*</url-pattern>
+		<url-pattern>/PMS/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>Faces Servlet</servlet-name>

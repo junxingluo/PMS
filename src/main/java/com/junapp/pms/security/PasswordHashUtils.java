@@ -7,6 +7,9 @@ import java.security.spec.KeySpec;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
+import com.junapp.pms.entity.User;
+import com.junapp.pms.persistence.EntityDAO;
+
 import sun.misc.BASE64Encoder;
 
 public class PasswordHashUtils {
@@ -25,7 +28,9 @@ public class PasswordHashUtils {
 	}
 	
 	public static boolean validateUser(String username, String password) {
+		String hashedPaswordInput = hash(password, username);
+		User userToLogin = EntityDAO.instance.getUserByName(username);
 		
-		return true;
+		return userToLogin != null ? userToLogin.getPasswordHash().equals(hashedPaswordInput) : false;
 	}
 }
