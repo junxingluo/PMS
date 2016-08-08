@@ -1,12 +1,16 @@
 package com.junapp.pms.security;
  
 import java.io.Serializable;
- 
+import java.util.List;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
+
+import com.junapp.pms.entity.User;
+import com.junapp.pms.persistence.EntityDAO;
  
 @ManagedBean(name="login")
 @SessionScoped
@@ -17,7 +21,7 @@ public class Login implements Serializable {
     private String pwd;
     private String msg;
     private String user;
- 
+    
     public String getPwd() {
         return pwd;
     }
@@ -59,6 +63,23 @@ public class Login implements Serializable {
         }
     }
  
+    /**
+     * TODO: to be moved out
+     * @return
+     */
+    public List<User> getAllUsers()
+    {
+    	return EntityDAO.instance.getAllUsers();
+    }
+    
+    /**
+     * TODO implement and move out
+     */
+    public void addUser()
+    {
+    	
+    }
+    
     //logout event, invalidate session
     public String logout() {
         HttpSession session = SessionBean.getSession();
