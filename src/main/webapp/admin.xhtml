@@ -30,9 +30,12 @@
 		    </h:column>
 		</h:dataTable>
 		
-		<h:inputText id="addUserName"></h:inputText>
-		<h:inputSecret id="adUserPassword"></h:inputSecret>
-		<h:commandButton ></h:commandButton>
+		<h:inputText id="addUserName" value="#{login.newUserName}" />
+		<h:inputSecret id="addUserPassword" value="#{login.newUserPwd}" />
+		<h:commandButton actionListener="#{login.addUser}"
+			render="userTable"
+			execute="addUserName addUserPassword" 
+			value="Add User" />
 		   
     </h:form>
 </h:body>

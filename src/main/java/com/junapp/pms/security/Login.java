@@ -62,11 +62,31 @@ public class Login implements Serializable {
             return "login";
         }
     }
- 
+    
     /**
      * TODO: to be moved out
      * @return
      */
+    
+    private String newUserPwd;
+    public String getNewUserPwd() {
+		return newUserPwd;
+	}
+
+	public String getNewUserName() {
+		return newUserName;
+	}
+
+	private String newUserName;
+    
+	public void setNewUserPwd(String newUserPwd) {
+		this.newUserPwd = newUserPwd;
+	}
+
+	public void setNewUserName(String newUserName) {
+		this.newUserName = newUserName;
+	}
+
     public List<User> getAllUsers()
     {
     	return EntityDAO.instance.getAllUsers();
@@ -77,7 +97,8 @@ public class Login implements Serializable {
      */
     public void addUser()
     {
-    	
+    	User newUser = new User(newUserName, newUserPwd);
+    	EntityDAO.instance.save(newUser);
     }
     
     //logout event, invalidate session
