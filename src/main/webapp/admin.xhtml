@@ -28,6 +28,12 @@
 		        </f:facet>
 		        <h:outputText value="#{user.name}" />
 		    </h:column>
+		    <h:column>
+		        <f:facet name="header">
+		            <h:outputText value="Computers" />
+		        </f:facet>
+		        <h:outputText value="#{user.computers}" />
+		    </h:column>
 		</h:dataTable>
 		
 		<h:inputText id="addUserName" value="#{login.newUserName}" />

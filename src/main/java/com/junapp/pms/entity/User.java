@@ -1,7 +1,14 @@
 package com.junapp.pms.entity;
 
-import javax.persistence.*;
+import java.util.List;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import com.junapp.pms.security.PasswordHashUtils;
 
@@ -17,8 +24,15 @@ public class User implements PersistentEntity {
     
     @Column(name="password_hash")
     private String passwordHash;
+    
+    @OneToMany(mappedBy="owner", fetch=FetchType.EAGER)
+    private List<Computer> computers;
  
-    protected User() {} //for hibernate
+    public List<Computer> getComputers() {
+		return computers;
+	}
+
+	protected User() {} //for hibernate
     
     public User(String name, String password) {
         this.name = name;

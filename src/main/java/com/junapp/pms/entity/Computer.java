@@ -1,33 +1,41 @@
 package com.junapp.pms.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Id;
 import javax.persistence.Table;
- 
+
 @Entity
-@Table
-public class Department implements PersistentEntity {
+@Table(name="computer")
+public class Computer implements PersistentEntity {
  
     @Id
     @GeneratedValue
     private Long id;
  
-     
+    @Column(name = "name")
     private String name;
-     
-    @OneToMany(mappedBy="department",cascade=CascadeType.PERSIST)
-    private List<User> employees = new ArrayList<User>();
+
+    @ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    @JoinColumn(name="owner")
+    private User owner;
       
-    public Department() {
+    public User getOwner() {
+		return owner;
+	}
+    
+	public void setOwner(User owner) {
+		this.owner = owner;
+	}
+	public Computer() {
         super();
     }
-    public Department(String name) {
+    public Computer(String name) {
         this.name = name;
     }
     public Long getId() {
@@ -41,11 +49,5 @@ public class Department implements PersistentEntity {
     }
     public void setName(String name) {
         this.name = name;
-    }
-    public List<User> getEmployees() {
-        return employees;
-    }
-    public void setEmployees(List<User> employees) {
-        this.employees = employees;
     }
 }
